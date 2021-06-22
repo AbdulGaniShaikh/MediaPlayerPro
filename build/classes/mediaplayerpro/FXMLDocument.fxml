@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mediaplayerpro.FXMLDocumentController" >
+    <style>
+        -fx-font-size: 20px;
+    </style>
+    <top>
+        <VBox>
+            <MenuBar>
+                <styleClass>MenuContainer</styleClass>
+                <Menu text="Media">
+                    <MenuItem fx:id="openMenuItem"  mnemonicParsing="false" text="  Open File" accelerator="CTRL+O" onAction="#openMenuItem">
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="17" fitWidth="17">
+                                <javafx.scene.image.Image url="@IconFolder/disk.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="openDirMenuItem"  mnemonicParsing="false" text="  Open Directory" accelerator="CTRL+D" onAction="#openDirMenuItem">
+                        <graphic>
+                            <javafx.scene.image.ImageView>
+                                <javafx.scene.image.Image url="@IconFolder/open.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>               
+                    <Menu fx:id="recentMenu"  text="  Open Recent" disable="true"/> 
+                    <SeparatorMenuItem/>
+                    <MenuItem text="  Exit" accelerator="ALT+X" onAction="#exitMenuItem" fx:id="exitMenu">
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="17" fitWidth="17" >
+                                <javafx.scene.image.Image url="@IconFolder/exit.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem> 
+                </Menu> 
+                <Menu text="Playback">
+                    <MenuItem fx:id="playItem" text="  Play" disable="true" onAction="#setPlayPause" >
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="13" fitWidth="13"  >
+                                <javafx.scene.image.Image url="@IconFolder/play-arrow.png"/>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="stopItem" text="  Stop" disable="true" onAction="#stopAction" >
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="13" fitWidth="13"  >
+                                <javafx.scene.image.Image url="@IconFolder/stop.png"/>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="nextItem" text="  Next" disable="true" onAction="#nextAction">
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="13" fitWidth="13"  >
+                                <javafx.scene.image.Image url="@IconFolder/skip.png"/>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="previousItem" text="  Previous" disable="true" onAction="#previousAction">
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="13" fitWidth="13"  >
+                                <javafx.scene.image.Image url="@IconFolder/previous.png"/>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem> 
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="jumpForward" text="  Jump Forward" onAction="#jumpForward" >
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="30" fitWidth="30" >
+                                <javafx.scene.image.Image url="@IconFolder/skip15.png"/>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="jumpBackward" text="  Jump Backward" onAction="#jumpBackward" >
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="30" fitWidth="30" >
+                                <javafx.scene.image.Image url="@IconFolder/replay15.png"/>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                </Menu> 
+                <Menu text="Audio">
+                    <MenuItem fx:id="increaseVolItem" text="  Increase Volume" accelerator="CTRL+UP">
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="17" fitWidth="17" >
+                                <javafx.scene.image.Image url="@IconFolder/ispeaker.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="decreaseVolItem" text="  Decrease Volume" accelerator="CTRL+DOWN" >
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="17" fitWidth="17" >
+                                <javafx.scene.image.Image url="@IconFolder/dspeaker.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="muteItem" text="  Mute" accelerator="CTRL+M" >
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="17" fitWidth="17" >
+                                <javafx.scene.image.Image url="@IconFolder/mute.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem> 
+                </Menu> 
+                <Menu text="Playlist" >
+                    <MenuItem fx:id="createPlaylist" text="  Playlist" onAction="#PlaylistListner" >
+                        <accelerator>CTRL+L</accelerator>
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="17" fitWidth="17" >
+                                <javafx.scene.image.Image url="@IconFolder/playlist.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem fx:id="queue" text="  Queue" onAction="#queueListener">
+                        <accelerator>CTRL+Q</accelerator>
+                        <graphic>
+                            <javafx.scene.image.ImageView fitHeight="17" fitWidth="17" >
+                                <javafx.scene.image.Image url="@IconFolder/queue.png" />
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                </Menu> 
+            </MenuBar>   
+        </VBox>
+    </top>
+    <center>
+        <BorderPane fx:id="centerPane">
+            <center>
+                <!--<Pane fx:id="mediaPane">-->
+                    <javafx.scene.media.MediaView fx:id="mediaView" fitHeight="${centerPane.height}" fitWidth="${centerPane.width}"/>
+                <!--</Pane>-->
+                <javafx.scene.image.ImageView fx:id="backImageView">
+                </javafx.scene.image.ImageView>
+            </center>
+        </BorderPane>
+    </center>
+    <right>
+        <VBox fx:id="queuePane">
+            <style>
+                -fx-padding: 5 5 5 5;
+            </style>
+            <Label fx:id="queueNameLabel" text="Queue">
+                <VBox.margin>
+                    <Insets>
+                        <bottom>5</bottom>
+                    </Insets>
+                </VBox.margin>
+                <style>
+                    -fx-font-size: 20px;
+                </style>
+            </Label>
+            <HBox prefWidth="300">
+                <style>
+                    -fx-padding: 1 1 1 1;
+                </style>
+                <ListView fx:id="queueListView" >
+                    <HBox.hgrow>ALWAYS</HBox.hgrow>
+                </ListView>
+                <VBox.vgrow>ALWAYS</VBox.vgrow>
+            </HBox>
+        </VBox>
+    </right>
+    <bottom>
+        <BorderPane fx:id="bsContainer" >
+            <top>
+                <VBox spacing="5" >
+                    <styleClass>
+                        seekContainer
+                    </styleClass>
+                    <Slider fx:id="seek"  showTickLabels="false" showTickMarks="false" min="0" max="10">
+                        <disable>true</disable>
+                    </Slider>
+                    <BorderPane>
+                        <left>
+                            <Label fx:id="currentTime"  text="00:00"/>
+                        </left>
+                        <right>
+                            <Label fx:id="maxTime" text="00:00"/> 
+                        </right>
+                    </BorderPane>
+                </VBox>
+            </top>
+            <bottom>
+                <HBox spacing="50" >
+                    <style>
+                        -fx-padding: 5;
+                    </style>
+                    <HBox spacing="30" >
+                        <GridPane>
+                            <Button fx:id="play"  GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#setPlayPause" >
+                                <styleClass>CButton</styleClass>
+                                <graphic>
+                                    <javafx.scene.image.ImageView fitHeight="15" fitWidth="15"  >
+                                        <javafx.scene.image.Image url="@IconFolder/play-arrow.png" />
+                                    </javafx.scene.image.ImageView>
+                                </graphic>
+                                <disable>true</disable>
+                            </Button> 
+                        </GridPane>
+                        <GridPane hgap="10">
+                            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Button fx:id="previous"  GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#previousAction">
+                                    <styleClass>CButton</styleClass>
+                                    <graphic>
+                                        <javafx.scene.image.ImageView fitHeight="15" fitWidth="15"  >
+                                            <javafx.scene.image.Image url="@IconFolder/previous.png"/>
+                                        </javafx.scene.image.ImageView>
+                                    </graphic>
+                                    <disable>true</disable>
+                                </Button>
+                                <Button fx:id="stop"  GridPane.rowIndex="1" GridPane.columnIndex="2" onAction="#stopAction">
+                                    <styleClass>CButton</styleClass>
+                                    <graphic>
+                                        <javafx.scene.image.ImageView fitHeight="15" fitWidth="15"  >
+                                            <javafx.scene.image.Image url="@IconFolder/stop.png"/>
+                                        </javafx.scene.image.ImageView>
+                                    </graphic>
+                                    <disable>true</disable>
+                                </Button>
+                                <Button fx:id="next"  GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#nextAction">
+                                    <styleClass>CButton</styleClass>
+                                    <graphic>
+                                        <javafx.scene.image.ImageView fitHeight="15" fitWidth="15">
+                                            <javafx.scene.image.Image url="@IconFolder/skip.png"/>
+                                        </javafx.scene.image.ImageView>
+                                    </graphic>
+                                    <disable>true</disable>
+                                </Button>
+                            </GridPane>  
+                            <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                <ToggleButton fx:id="shuffle"  GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                    <GridPane.margin>
+                                        <javafx.geometry.Insets bottom="0" top="0" right="5" left="5"/>   
+                                    </GridPane.margin>
+                                    <styleClass>TButton</styleClass>
+                                    <graphic>
+                                        <javafx.scene.image.ImageView fitHeight="18" fitWidth="18"  >
+                                            <javafx.scene.image.Image url="@IconFolder/shuffle.png"/>
+                                        </javafx.scene.image.ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                                <ToggleButton fx:id="repeatB"  GridPane.rowIndex="1" GridPane.columnIndex="2">
+                                    <styleClass>TButton</styleClass>
+                                    <graphic>
+                                        <javafx.scene.image.ImageView fitHeight="18" fitWidth="18"  >
+                                            <javafx.scene.image.Image url="@IconFolder/repeat.png"/>
+                                        </javafx.scene.image.ImageView>
+                                    </graphic>
+                                </ToggleButton>
+                            </GridPane>
+                        </GridPane> 
+                    </HBox>
+                    <BorderPane>
+                        <left>
+                            <javafx.scene.image.ImageView fx:id="volControlImage" >
+                                <javafx.scene.image.Image url="@IconFolder/volume.png"/>
+                            </javafx.scene.image.ImageView>
+                        </left>
+                        <right>
+                            <Slider fx:id="volSlider"  min="0" max="100" showTickLabels="false" showTickMarks="false"
+                                    GridPane.rowIndex="1" GridPane.columnIndex="5" value="100" >
+                            </Slider>
+                        </right>
+                    </BorderPane>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </bottom>
+</BorderPane>

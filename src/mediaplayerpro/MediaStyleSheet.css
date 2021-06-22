@@ -1,0 +1,67 @@
+#bsContainer{
+    -fx-padding: 10px;
+    -fx-background-color: white;
+}
+
+.CButton{
+    -fx-background-color: white;
+}
+
+.WindowCenter{
+    -fx-background-color: linear-gradient(to bottom right , #2193b0, #FF2400);
+}
+
+.MenuContainer{
+    -fx-background-color: #fff;
+}
+
+#volSlider .track{
+    -fx-background-color: linear-gradient(to bottom right , #2193b0, #FF2400);
+}
+
+#volSlider .thumb{
+    -fx-background-color: #fff;
+    -fx-border-width: 1;
+    -fx-border-color: linear-gradient(to bottom right , #2193b0, #FF2400);
+    -fx-border-radius: 10 10 10 10;
+}
+
+#seek .track{
+    -fx-background-color: linear-gradient(to bottom right , #2193b0, #FF2400);
+}
+
+#seek .thumb{
+    -fx-background-color: #fff;
+    -fx-border-width: 1;
+    -fx-border-color: linear-gradient(to bottom right , #2193b0, #FF2400);
+    -fx-border-radius: 10 10 10 10;
+}
+
+#seek:hover .track{
+    -fx-cursor: hand;
+}
+#seek:hover .thumb{
+    -fx-cursor: hand;
+}
+
+#volSlider:hover .track{
+    -fx-cursor: hand;
+}
+#volSlider:hover .thumb{
+    -fx-cursor: hand;
+}
+
+.TButton:selected{
+    -fx-background-color: linear-gradient(to bottom right , #2193b0, #FF2400);
+}
+
+.TButton{
+    -fx-background-color: #FAFCFB;
+}
+#centerPane{
+    -fx-background-color: #FF2400;
+}
+
+/*#queuePane{
+    -fx-background-color: #FF2400;
+}*/

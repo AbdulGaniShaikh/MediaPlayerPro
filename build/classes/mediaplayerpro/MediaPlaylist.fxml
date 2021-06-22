@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mediaplayerpro.MediaPlaylistController">
+    <stylesheets>
+        <URL value="@mediaplaylist.css"/>
+    </stylesheets>
+    <style>
+        -fx-padding: 0,0,0,0;
+    </style>
+    <Tab text="Create Playlist">
+        <closable>false</closable>
+        <VBox>
+            <HBox>
+                <style>
+                    -fx-padding: 5 5 0 5;
+                </style>
+                <ListView fx:id="songListView" >
+                    <HBox.hgrow>ALWAYS</HBox.hgrow>
+                </ListView>
+            </HBox>
+            <HBox>
+                <style>
+                    -fx-padding: 5 0 5 0;
+                </style>
+                <TextField promptText="Enter Playlist Name" fx:id="playlistNameField">
+                    <HBox.margin>
+                        <javafx.geometry.Insets bottom="0" left="5" right="5" top="0"/>    
+                    </HBox.margin>
+                    <HBox.hgrow>ALWAYS</HBox.hgrow>
+                </TextField>
+            </HBox>
+            <BorderPane >
+                <style>
+                    -fx-padding: 0 5 5 5;
+                </style>
+                <left>
+                    <Button text="Add Media" fx:id="addSongButton">
+                        <VBox.vgrow>ALWAYS</VBox.vgrow>
+                    </Button>
+                </left>
+                <center>
+                    <Button text="Delete Media" onAction="#deleteSong">
+                        <VBox.vgrow>ALWAYS</VBox.vgrow>
+                    </Button>
+                </center>
+                <right>
+                    <Button text="Create Playlist" fx:id="createButton">
+                        <VBox.vgrow>ALWAYS</VBox.vgrow>
+                    </Button>
+                </right>
+            </BorderPane>
+        </VBox>
+    </Tab>
+    <Tab text="Open Playlist">
+        <closable>false</closable>
+        <VBox>
+            <HBox fx:id="sbContainer" >
+                <style>
+                    -fx-padding: 5 5 5 5;
+                </style>
+                <TextField promptText="Search Playlist" fx:id="searchNameField">
+                    <HBox.margin>
+                        <javafx.geometry.Insets bottom="0" left="5" right="5" top="0"/>    
+                    </HBox.margin>
+                    <HBox.hgrow>ALWAYS</HBox.hgrow>
+                </TextField>
+                <Button text="" fx:id="searchButton">
+                    <graphic>
+                        <javafx.scene.image.ImageView fitHeight="15" fitWidth="15">
+                            <javafx.scene.image.Image url="@IconFolder/search.png"/>
+                        </javafx.scene.image.ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+            <VBox>
+                <style>
+                    -fx-padding: 5 5 5 5;
+                </style>
+                <ListView fx:id="playListView"></ListView>
+            </VBox> 
+            <BorderPane >
+                <style>
+                    -fx-padding: 0 5 5 5;
+                </style>
+                <left>
+                    <Button fx:id="viewPlaylist" text="View PLaylist" onAction="#viewPlaylist">
+                        <VBox.vgrow>ALWAYS</VBox.vgrow>
+                    </Button>
+                </left>
+                <center>
+                    <Button text="Delete PLaylist" onAction="#deletePlaylist">
+                        <VBox.vgrow>ALWAYS</VBox.vgrow>
+                    </Button>
+                </center>
+                <right>
+                    <Button text="Open PLaylist" onAction="#openPlaylist">
+                        <VBox.vgrow>ALWAYS</VBox.vgrow>
+                    </Button>
+                </right>
+            </BorderPane>
+        </VBox>
+    </Tab>
+</TabPane>
